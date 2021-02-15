@@ -12,18 +12,15 @@ class Commonmodel extends CI_Model {
 	   return $query->result();
    }
    
-   public function insertData()
+   public function insertData($data)
    {
-	 $data = $this->input->post();
-	 echo '<pre>';print_r($data);die;
 	 $query = $this->db->insert('addressBook',$data);
-	 return $query; 
+	 return $this->db->insert_id();
    }
    
-   public function updateData($data,$id)
+   public function updateData($first_name,$last_name,$email,$id)
    {
-	   $query = $this->db->query("update  from addressBook where id = ".$id);
-	   return $query;
+	   $query = $this->db->query("update addressBook SET firstName='$first_name',lastName='$last_name',email='$email' where id='$id'");
    }
    
    public function deleteData($id)
@@ -34,9 +31,10 @@ class Commonmodel extends CI_Model {
    
    public function viewData($id)
    {
-	   $query = $this->db->query("select * from addressBook where id=".$id);
-	   $data = $query->result();
-	   $details = array('fname'=>$data[0]->firstName,'lname'=>$data[0]->lastName,'mob'=>$data[0]->mobileNo,'email'=>$data[0]->emailAddress);
-	   return $details;
+	   $this->db->where('id',$id);
+	   $q = $this->db->get('addressBook');
+       $data = $q->result_array();
+	   //$details = array('fname'=>$data[0]->firstName,'lname'=>$data[0]->lastName,'mob'=>$data[0]->mobileNo,'email'=>$data[0]->emailAddress);
+	   return $data;
    }
 }

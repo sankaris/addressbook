@@ -7,6 +7,7 @@ class AddressBook extends CI_Controller {
 		{
 			$this->load->model('commonmodel');
 			$this->load->helper('url');
+			$this->load->helper('form');
 			$result['data'] = $this->commonmodel->listData();
 			$this->load->view('list',$result);
 		}
@@ -20,25 +21,46 @@ class AddressBook extends CI_Controller {
 		
 	public function addContact()
 		{
-			$this->load->model('commonmodel');
 			$this->load->view('add');
-			$this->save();
-		}
-		
-	public function save()
-	{
-		$this->load->model('commonmodel');
-		$fname = $this->input->post('fname');
-		echo $fname;die;
-		if($this->input->post('submit') == true){
-			$ins = $this->commonmodel->insertData();
-		}
+			$this->load->model('commonmodel');
+			if($this->input->post('save'))
+			{
+				$data['firstName']=$this->input->post('fname');
+				$data['lastName']=$this->input->post('lname');
+				$data['dob']=$this->input->post('dob');
+				$data['gender']=$this->input->post('gender');
+				$data['mobileNo']=$this->input->post('mobileno');
+				$data['phoneNo']=$this->input->post('phoneno');
+				$data['emailAddress']=$this->input->post('email');
+				$data['street']=$this->input->post('street');
+				$data['city']=$this->input->post('city');
+				$data['hobbies']=$this->input->post('hobbies');
+				$result=$this->commonmodel->insertData($data);
+				if($result>0){
+						echo "Contact Saved Successfully";
+						$this->listContact();
+				}
+				else{
+						echo "Error in inserting address";
+				}
+			}
 	}
 	
 	public function updateContact()
 		{
+			$id=$this->input->post('id');
 			$this->load->model('commonmodel');
-			$this->load->view('update');
+			$result['data']=$this->commonmodel->viewData($id);
+			$this->load->view('update',$result);
+	
+			if($this->input->post('update'))
+			{
+				$firstName=$this->input->post('fname');
+				$lastName=$this->input->post('lname');
+				$email=$this->input->post('email');
+				$this->commonmodel->updateContact($first_name,$last_name,$email,$id);
+				echo "Data updated successfully !";
+			}
 		}
 	
 	public function deleteContact()

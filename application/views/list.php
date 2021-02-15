@@ -27,6 +27,7 @@
 <tbody>
 <h3><center>Address Book </center></h3>
 <h5>List Contact </h5>
+
 <a name="addBtn" class="addbtn" href="index.php/add"> ADD </a>
 <?php
 $i = 1;
@@ -39,7 +40,7 @@ foreach($data as $resp)
 		echo "<td>".$resp->lastName."</td>";
 		echo "<td>".$resp->emailAddress."</td>";
 		echo "<td>".$resp->street .", ".$resp->city."</td>";
-		echo "<td><a href='update?id=$id&action=update' class='updateBtn' id=$id>Update</a></td><td><button  class='delBtn' id=$id> Delete</button></td><td><button  class='viewBtn' id=$id> View</button></td>";
+		echo "<td><button class='updateBtn' id=$id>Update</button></td><td><button  class='delBtn' id=$id> Delete</button></td><td><button  class='viewBtn' id=$id> View</button></td>";
 		$i++;
 	}
 ?>
@@ -80,7 +81,7 @@ $('.viewBtn').on('click',function(){
 		dataType : 'json',
 		data : {"id":id},
 		success: function (response){
-			alert(response);
+			console.log(response);
 		},
 		error : function(err){
 			return err;
@@ -88,14 +89,13 @@ $('.viewBtn').on('click',function(){
 	});
 });
 
-$('.addbtn').on('click',function(){
-	var fname = $('#fname').value();
-	alert(fname);
+$('.updateBtn').on('click',function(){
+	var id = $(this).attr('id');
 	$.ajax({
 	type:"POST",
-		url: 'index.php/add',
+		url: 'index.php/update',
 		dataType : 'json',
-		data : {"fname":fname},
+		data : {"id":id},
 		success: function (response){
 			return response;
 		},

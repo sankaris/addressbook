@@ -58,3 +58,4 @@ $route['list'] = 'addressBook/listContact';
 $route['add'] = 'addressBook/addContact';
 $route['view'] = 'addressBook/viewContact';
 $route['delete'] = 'addressBook/deleteContact';
+$route['update'] = 'addressBook/updateContact';

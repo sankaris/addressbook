@@ -27,7 +27,7 @@ City :
 <input type="city" name="city" id="city" maxlength="120" value=""/><br/>
 Hobbies :
 <textarea  name="hobbies" id="hobbies" maxlength="120" rows="5" cols="" value=""></textarea><br/>
-<input type="submit" value="SUBMIT" />
+<input type="submit" name="save" value="SUBMIT" />
 </form>
 </body>
 </html>
