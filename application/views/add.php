@@ -16,9 +16,9 @@ Please select your gender :
 <input type="radio" id="female" name="gender" value="female"> Female </input>
 <br/>
 Mobile No: 
-<input type="number" name="mobileno" id="mobileno" minlength="10" maxlength="16" value="" required/><br/>
+<input type="tel" name="mobileno" id="mobileno" minlength="10" maxlength="16" value="" pattern="[0-9]" required/><br/>
 Phone No:
-<input type="number" name="phoneno" id="phoneno" minlength="10" maxlength="16" value="" /><br/>
+<input type="tel" name="phoneno" id="phoneno" minlength="10" maxlength="16" value="" pattern="[0-9]" /><br/>
 Email:
 <input type="email" name="email" id="email" maxlength="120" value="" required/><br/>
 Street : 
